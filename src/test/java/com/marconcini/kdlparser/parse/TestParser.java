@@ -93,7 +93,7 @@ public class TestParser {
         assertThat(parser.parse("node \"hello\""), equalTo(doc(node("node", list("hello")))));
         assertThat(parser.parse("node \"hello\\nworld\""), equalTo(doc(node("node", list("hello\nworld")))));
         assertThat(parser.parse("node \"\\u{1F408}\""), equalTo(doc(node("node", list("\uD83D\uDC08")))));
-        assertThat(parser.parse("node \"\\\"\\\\\\/\\b\\u000c\\n\\r\\t\""),
+        assertThat(parser.parse("node \"\\\"\\\\\\/\\b\\u{000c}\\n\\r\\t\""),
                 equalTo(doc(node("node", list("\"\\/\u0008\u000C\n\r\t")))));
         assertThat(parser.parse("node \"\\u{10}\""), equalTo(doc(node("node", list("\u0010")))));
 
@@ -424,7 +424,6 @@ public class TestParser {
         return new KDLDocument(nodeList);
     }
 
-    @SuppressWarnings({"OptionalGetWithoutIsPresent"})
     private KDLNode node(String ident, Optional<String> type, List<Object> args, Map<String, Object> props, KDLNode... nodes) {
         List<KDLValue<?>> argValues = new ArrayList<>();
         for (Object o : args) {
@@ -438,7 +437,7 @@ public class TestParser {
         if (nodes.length > 0) {
             children = Optional.of(doc(nodes));
         }
-        return new KDLNode(ident, type.get(), propValues, argValues, children.get());
+        return new KDLNode(ident, type.orElse(null), propValues, argValues, children.orElse(null));
     }
 
     private KDLNode node(String ident, List<Object> args, Map<String, Object> props, KDLNode... nodes) {
