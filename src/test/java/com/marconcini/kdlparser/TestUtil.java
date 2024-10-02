@@ -6,11 +6,13 @@ import com.marconcini.kdlparser.parse.KDLParser;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
+import org.junit.Ignore;
 
 import java.io.IOException;
 import java.io.StringReader;
 
 @SuppressWarnings("rawtypes")
+@Ignore
 public class TestUtil {
     public static final KDLParser parser = new KDLParser();
 
@@ -40,6 +42,7 @@ public class TestUtil {
 }
 
 @SuppressWarnings("rawtypes")
+@Ignore
 class ThrowsExceptionMatcher extends TypeSafeMatcher<Runnable> {
 
   private final Class exceptionClass;
