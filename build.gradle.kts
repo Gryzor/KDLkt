@@ -1,6 +1,6 @@
 plugins {
     id("java")
-    kotlin("jvm") version "1.9.20"
+    kotlin("jvm") version "1.9.25"
 }
 
 group = "com.marconcini"
